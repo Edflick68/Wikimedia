@@ -14,5 +14,7 @@ namespace Wikimedia.Models
         public string Description { get; set; } 
         public string YoutubeId { get; set; }
         public DateTime PublishDate { get; set; } = DateTime.Now;
+
+        public DateTime LastModified {  get; set; } 
     }
 }

@@ -37,3 +37,17 @@
 
     </dl>
 </div>
+<script>
+    const mediaId = @Model.Id;  
+    const lastModified = "@Model.LastModified.Ticks";
+
+    setInterval(() => {
+        fetch('/Media/GetLastModified/' + mediaId)
+            .then(r => r.text())
+            .then(serverValue => {
+                if (serverValue && serverValue != lastModified) {
+                    location.reload();
+                }
+            });
+    }, 5000);
+</script>

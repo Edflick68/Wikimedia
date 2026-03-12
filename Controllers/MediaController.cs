@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Web.Mvc;
+using System;
 
 namespace Wikimedia.Controllers
 {
@@ -161,6 +162,7 @@ namespace Wikimedia.Controllers
             if (storedMedia != null)
             {
                 media.Id = id;
+                media.LastModified = DateTime.Now;
                 DB.Medias.Update(media);
             }
             return RedirectToAction("Details/" + id);
@@ -179,6 +181,14 @@ namespace Wikimedia.Controllers
             int id = Session["CurrentMediaId"] != null ? (int)Session["CurrentMediaId"] : 0;
             return Json(DB.Medias.ToList().Where(c => c.Title == Name && c.Id != id).Any(),
                         JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetLastModified(int id)
+        {
+            Media media = DB.Medias.Get(id);
+            if(media == null)
+                return Content("");
+            return Content(media.LastModified.Ticks.ToString());
         }
     }
 }
