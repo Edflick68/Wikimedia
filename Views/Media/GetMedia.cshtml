@@ -1,0 +1,12 @@
+@model IEnumerable<Wikimedia.Models.Media>
+
+@foreach (var media in Model)
+{
+    <div class="mediaListLayout">
+        <a href="/Media/Details/@media.Id" title="Voir les détails de @media.Title" style="text-decoration:none">
+            <div style="max-width:300px; font-size:1em; font-weight:bold" class="ellipsis">@media.Title</div>
+            <img class="mediaThumbnail" src="https://img.youtube.com/vi/@media.YoutubeId/mqdefault.jpg" loading="lazy">
+            <div style="color:gray; font-size:0.8em">@media.Category</div>
+        </a>
+    </div>
+}

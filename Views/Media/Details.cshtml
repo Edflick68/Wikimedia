@@ -1,0 +1,39 @@
+@model Wikimedia.Models.Media
+
+<div class="detailsPanel">
+    <dl>
+        <dd>
+            @Model.Title
+        </dd>
+        <dd>
+            <iframe class="mediaPlayerBig"
+                    src="https://www.youtube.com/embed/@Model.YoutubeId"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+            </iframe>
+        </dd>
+        <dt>
+            Description
+        </dt>
+        <dd class="description">
+            @Model.Description
+        </dd>
+        <dt>
+            Catégorie
+        </dt>
+
+        <dd>
+            @Model.Category
+        </dd>
+
+        <dt>
+            Date de publication
+        </dt>
+
+        <dd>
+            @Model.PublishDate.ToLongDateString()
+        </dd>
+
+    </dl>
+</div>

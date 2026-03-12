@@ -1,0 +1,13 @@
+
+@{
+    ViewBag.PageTitle = "Wikimedia";
+}
+
+<div id="panel"></div>
+
+@section Scripts {
+    <script>$(() => {
+            newSession(120);
+            let panel = new AutoRefreshedPanel("panel", "/Media/GetData", 3);
+        })</script>
+}

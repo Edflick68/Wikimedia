@@ -1,0 +1,45 @@
+<div id="MediaListPanel" class="mediaListLayout">
+
+</div>
+
+@section Scripts {
+    <script>
+    $(() => {
+            let mediaListAutoRefreshPanel = new AutoRefreshedPanel("MediaListPanel", "/Media/GetMedia", 5, mediaListPostRefresh);
+            let catSelectAutoRefreshPanel = new AutoRefreshedPanel("CategorySelectPanel", "/Media/GetMediaCategories", -1, catSelectPostRefresh);
+            let keywordsOnchangeTimer = null;
+
+            $("#searchInput").on('keyup', function () {
+                clearTimeout(keywordsOnchangeTimer);
+                keywordsOnchangeTimer = setTimeout(() => {
+                    window.location = "/Media/SetSearchString?value=" + $("#searchInput").val();
+                }, 500);
+            });
+            $("#searchInput").on('search', function () {
+                clearTimeout(keywordsOnchangeTimer);
+                window.location = "/Media/SetSearchString?value=" + $("#searchInput").val();
+            });
+            $("#searchInput").focus(function () {
+                mediaListAutoRefreshPanel.pause();
+            });
+            $("#searchInput").blur(function () {
+                mediaListAutoRefreshPanel.restart();
+            });
+            function mediaListPostRefresh() {
+                catSelectAutoRefreshPanel.refresh(true);
+            }
+            function catSelectPostRefresh() {
+
+                $("#catSelect").off();
+                $("#catSelect").focus(function () {
+                    mediaListAutoRefreshPanel.pause();
+                });
+                $("#catSelect").blur(function () {
+                    mediaListAutoRefreshPanel.restart();
+                });
+                $("#catSelect").on('change', function () {
+                    window.location = "/Media/SetSearchCat?value=" + $("#catSelect").val();
+                });
+            }
+        })</script>
+}

@@ -1,0 +1,47 @@
+﻿.mediaListLayout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    flex-direction: row;
+}
+
+    .mediaListLayout a {
+        text-decoration: none;
+        cursor: pointer;
+        color: black;
+    }
+
+        .mediaListLayout a:hover {
+            background-color: aliceblue;
+        }
+
+.mediaLayout {
+    display: flex;
+    align-items: center;
+    width: 330px;
+    gap: 6px;
+    font-size: 1.2em;
+    color: black;
+}
+
+.mediaThumbnail {
+    width: 300px;
+    aspect-ratio: 16/9;
+    border-radius: 6px;
+}
+
+.mediaThumbnailBig {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 6px;
+}
+
+.mediaPlayerBig {
+    aspect-ratio: 16/9;
+    width: 100% !important;
+    max-width: 800px !important;
+}
+
+.description {
+    font-size: 1em !important;
+}
