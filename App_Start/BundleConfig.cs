@@ -9,14 +9,14 @@ namespace Wikimedia
         {
             bundles.Add(new ScriptBundle("~/bundles/validation").Include(
             "~/Scripts/validation.js",
-            "~/Scripts/jquery - maskedinput.js",
+            "~/Scripts/jquery-maskedinput.js",
             "~/Scripts/bootbox.js",
             "~/Scripts/selection.js",
             "~/Scripts/SiteScripts.js",
             "~/Scripts/session.js",
             "~/Scripts/SiteNotificationsHandler.js",
             "~/Scripts/autoRefreshPanel.js",
-            "~/Scripts/image - control.js"));
+            "~/Scripts/image-control.js"));
             bundles.Add(new StyleBundle("~/Content/css").Include(
                         "~/Content/_layout.css",
                         "~/Content/Accounts.css",
