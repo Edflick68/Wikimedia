@@ -1,14 +1,16 @@
-﻿using Wikimedia.Models;
-using DAL;
+﻿using DAL;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Web.Mvc;
-using System;
+using Models;
+using static Controllers.AccessControl;
+using Wikimedia.Models;
 
-namespace Wikimedia.Controllers
+namespace Controllers
 {
-    [Authorize]
+    [UserAccess(Access.View)]
     public class MediaController : Controller
     {
         private void InitSessionVariables()
@@ -21,6 +23,7 @@ namespace Wikimedia.Controllers
             if (Session["Categories"] == null) Session["Categories"] = DB.MediasCategories();
             if (Session["SortByTitle"] == null) Session["SortByTitle"] = true;
             if (Session["SortByDate"] == null) Session["SortByDate"] = true;
+            if (Session["SortAscending"] == null) Session["SortAscending"] = false;
         }
 
         private void ResetCurrentMediaInfo()
@@ -44,7 +47,7 @@ namespace Wikimedia.Controllers
         public ActionResult GetMedia(bool forceRefresh = false)
         {
             IEnumerable<Media> result = null;
-            if (forceRefresh || DB.Medias.HasChanged)
+            if (DB.Medias.HasChanged || forceRefresh )
             {
                 InitSessionVariables();
                 bool search = (bool)Session["Search"];

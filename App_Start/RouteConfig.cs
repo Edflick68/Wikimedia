@@ -11,7 +11,7 @@ namespace Wikimedia
     {
         public static string DefaultAction()
         {
-            return "/Media/ProtectedView";
+            return "/Media/List";
         }
         public static void RegisterRoutes(RouteCollection routes)
         {
@@ -20,7 +20,7 @@ namespace Wikimedia
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Media", action = "List", id = UrlParameter.Optional }
+                defaults: new { controller = "Accounts", action = "Login", id = UrlParameter.Optional }
             );
         }
     }
