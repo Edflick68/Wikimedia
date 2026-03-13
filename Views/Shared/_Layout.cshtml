@@ -16,6 +16,7 @@
 
     <div class="page">
         @{
+            bool connected = Models.User.ConnectedUser != null;
             Html.RenderPartial("_header");
         }
 

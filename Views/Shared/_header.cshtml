@@ -24,6 +24,12 @@
         <a class="siteIcon" href="/media/list"></a>
         @switch (action)
         {
+            case "subscribe":
+                <div id="mainMenuPanel" class="menu">
+                    <i class="cmdIcon submitCmd fa fa-circle-check" title="Soumettre" onclick="document.getElementById('submit').click()"></i>
+                    <a class="cmdIcon fa fa-square-xmark" title="Annuler" onclick="history.back()"></a>
+                </div>
+                break;
             case "list":
                 <div class="pageTitle">Wikimedia</div>
                 <div id="mainMenuPanel" class="menu">
@@ -124,6 +130,9 @@
                 <div id="mainMenuPanel" class="menu">
                     <a href="/@controller/List" class="cmdIcon fa fa-square-xmark" title="Retour"></a>
                 </div>
+                break;
+            case "login":
+                <div class="pageTitle">Connexion</div>
                 break;
         }
 

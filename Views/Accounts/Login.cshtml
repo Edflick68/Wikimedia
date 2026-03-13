@@ -15,6 +15,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+    ViewBag.PageTitle = "Se connecter";
     @Html.HiddenFor(m => m.TimeZoneOffset)
 
     <div class="event-form">
