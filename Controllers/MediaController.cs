@@ -8,6 +8,7 @@ using System;
 
 namespace Wikimedia.Controllers
 {
+    [Authorize]
     public class MediaController : Controller
     {
         private void InitSessionVariables()
@@ -127,6 +128,7 @@ namespace Wikimedia.Controllers
             }
             return RedirectToAction("List");
         }
+        [Authorize(Roles = "Writer")]
         public ActionResult Create()
         {
             return View(new Media());
@@ -134,12 +136,13 @@ namespace Wikimedia.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken()]
+        [Authorize(Roles = "Writer")]
         public ActionResult Create(Media media)
         {
             DB.Medias.Add(media);
             return RedirectToAction("List");
         }
-
+        [Authorize(Roles = "Writer")]
         public ActionResult Edit()
         {
             int id = Session["CurrentMediaId"] != null ? (int)Session["CurrentMediaId"] : 0;
@@ -154,6 +157,7 @@ namespace Wikimedia.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken()]
+        [Authorize(Roles = "Writer")]
         public ActionResult Edit(Media media)
         {
             int id = Session["CurrentMediaId"] != null ? (int)Session["CurrentMediaId"] : 0;
@@ -167,6 +171,7 @@ namespace Wikimedia.Controllers
             }
             return RedirectToAction("Details/" + id);
         }
+        [Authorize(Roles = "Writer")]
         public ActionResult Delete()
         {
             int id = Session["CurrentMediaId"] != null ? (int)Session["CurrentMediaId"] : 0;
