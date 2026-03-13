@@ -111,6 +111,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="WebServices\Countries.cs" />
+    <Compile Include="WebServices\GeoLocation.cs" />
     <Content Include="App_Data\iso-3166.txt" />
     <Content Include="Content\Accounts.css" />
     <Content Include="Content\Icons.css" />
