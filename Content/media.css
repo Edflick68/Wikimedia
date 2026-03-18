@@ -45,3 +45,16 @@
 .description {
     font-size: 1em !important;
 }
+
+
+.UserSmallAvatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 35px;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+.transparentBackground {
+    background-color: rgba(255, 255, 255, 0.5);
+}
