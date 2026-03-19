@@ -4,6 +4,10 @@
     <dl>
         <dd>
             @Model.Title
+            if (Model.Shared)
+            {
+            <span class="fa-solid fa-share-nodes" title="Partagé">[Partagé]</span>
+            }
         </dd>
         <dd>
             <iframe class="mediaPlayerBig"
@@ -34,7 +38,14 @@
         <dd>
             @Model.PublishDate.ToLongDateString()
         </dd>
+        <dt>
+            Publié par
+        </dt>
 
+        <dd class="UserMediumAvatar transparentBackground">
+            <img src="@Model.Publisher.Avatar" />
+            @Model.Publisher.Name
+        </dd>
     </dl>
 </div>
 <script>
