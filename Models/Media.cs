@@ -1,4 +1,6 @@
 ﻿using DAL;
+using Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +18,8 @@ namespace Wikimedia.Models
         public DateTime LastModified { get; set; }
         public int UserId {  get; set; }
         public bool Shared { get; set; }
+
+        [JsonIgnore]
+        public User Publisher => DB.Users.Get(UserId);
     }
 }

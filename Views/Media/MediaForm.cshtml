@@ -22,24 +22,28 @@
     </select>
     <label for="Description" class="form-label">Description </label>
     <textarea class="form-control Description"
-           name="Description"
-           id="Description"
-           placeholder="Description"
-           rows="9"
-           required
-           RequireMessage="Description"
-           InvalidMessage="Description invalide"
-           value="@Model.Description"> </textarea>
+              name="Description"
+              id="Description"
+              placeholder="Description"
+              rows="9"
+              required
+              RequireMessage="Description"
+              InvalidMessage="Description invalide"
+              value="@Model.Description"> </textarea>
+
+    <label for="Shared" class="form-label">Vous-vous activé le partage? </label>
+    @Html.CheckBox("Shared", @Model.Shared, new { @class = "form-check-input" })
 
     <input id="submit" type="submit" value="Enregistrer" class="btn btn-primary" style="display:none">
     <label for="YoutubeId" class="form - label">
-        Id du media Youtube </label>
-        <input id="YoutubeId" name="YoutubeId"
-               class="form - control" placeholder="Id youtube" value=" @Model.YoutubeId "
-               required
-               RequireMessage="Veuillez entrer un id du media Youtube"
-                CustomErrorMessage="Cet id est déjà utilisé"/>
-        <img id="previewThumbnail" class="mediaThumbnailBig"
-             src="https://img.youtube.com/vi/@Model.YoutubeId/mqdefault.jpg" loading="lazy">
-        <input id="submit" type="submit" value="Enregistrer" class="btn btn-primary" style="display:none">
+        Id du media Youtube
+    </label>
+    <input id="YoutubeId" name="YoutubeId"
+           class="form - control" placeholder="Id youtube" value=" @Model.YoutubeId "
+           required
+           RequireMessage="Veuillez entrer un id du media Youtube"
+           CustomErrorMessage="Cet id est déjà utilisé" />
+    <img id="previewThumbnail" class="mediaThumbnailBig"
+         src="https://img.youtube.com/vi/@Model.YoutubeId/mqdefault.jpg" loading="lazy">
+    <input id="submit" type="submit" value="Enregistrer" class="btn btn-primary" style="display:none">
 </form>
