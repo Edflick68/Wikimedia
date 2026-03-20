@@ -44,6 +44,24 @@ namespace Controllers
             }
             return null;
         }
+
+        public ActionResult GetMediaDetails(bool forceRefresh = false)
+        {
+            try
+            {
+                InitSessionVariables();
+                int mediaId = (int)Session["CurrentMediaId"];
+                Media media = DB.Medias.Get(mediaId);
+                if(DB.Users.HasChanged || DB.Medias.HasChanged || forceRefresh)
+                {
+                    return PartialView(media);
+                }
+                return null;
+            }catch(System.Exception ex)
+            {
+                return Content("Erreur interne" + ex.Message, "text/html");
+            }
+        }
         public ActionResult GetMedia(bool forceRefresh = false)
         {
             IEnumerable<Media> result = null;
