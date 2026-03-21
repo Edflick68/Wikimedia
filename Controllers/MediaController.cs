@@ -19,11 +19,12 @@ namespace Controllers
             if (Session["CurrentMediaTitle"] == null) Session["CurrentMediaTitle"] = "";
             if (Session["Search"] == null) Session["Search"] = false;
             if (Session["SearchString"] == null) Session["SearchString"] = "";
-            if (Session["CurrentSelectedCategory"] == null) Session["CurrentSelectedCategory"] = 0;
+            if (Session["CurrentSelectedCategory"] == null) Session["CurrentSelectedCategory"] = "";
             if (Session["Categories"] == null) Session["Categories"] = DB.MediasCategories();
             if (Session["SortByTitle"] == null) Session["SortByTitle"] = true;
             if (Session["SortByDate"] == null) Session["SortByDate"] = true;
             if (Session["SortAscending"] == null) Session["SortAscending"] = false;
+            ValidateSelectedCategory();
         }
 
         private void ResetCurrentMediaInfo()
@@ -31,7 +32,16 @@ namespace Controllers
             Session["CurrentMediaId"] = 0;
             Session["CurrentMediaTitle"] = "";
         }
-
+        private void ValidateSelectedCategory()
+        {
+            if (Session["SelectedCategory"] != null)
+            {
+                var selectedCategory = (string)Session["SelectedCategory"];
+                var Medias = DB.Medias.ToList().Where(c => c.Category == selectedCategory);
+                if (Medias.Count() == 0)
+                    Session["SelectedCategory"] = "";
+            }
+        }
         public ActionResult GetMediasCategoriesList(bool forceRefresh = false)
         {
             InitSessionVariables();
@@ -111,6 +121,11 @@ namespace Controllers
             Session["Search"] = !(bool)Session["Search"];
             return RedirectToAction("List");
         }
+        public ActionResult ToggleSort()
+        {
+            Session["SortAscending"] = !(bool)Session["SortAscending"];
+            return RedirectToAction("List");
+        }
         public ActionResult SortByTitle()
         {
             Session["SortByTitle"] = true;
@@ -149,7 +164,7 @@ namespace Controllers
             }
             return RedirectToAction("List");
         }
-        [Authorize(Roles = "Writer")]
+        [UserAccess(Access.Write)]
         public ActionResult Create()
         {
             return View(new Media());
@@ -157,14 +172,14 @@ namespace Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken()]
-        [Authorize(Roles = "Writer")]
-        
+        [UserAccess(Access.Write)]
+
         public ActionResult Create(Media media)
         {
             DB.Medias.Add(media);
             return RedirectToAction("List");
         }
-        [Authorize(Roles = "Writer")]
+        [UserAccess(Access.Write)]
         public ActionResult Edit()
         {
             int id = Session["CurrentMediaId"] != null ? (int)Session["CurrentMediaId"] : 0;
@@ -179,7 +194,7 @@ namespace Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken()]
-        [Authorize(Roles = "Writer")]
+        [UserAccess(Access.Write)]
         public ActionResult Edit(Media media)
         {
             int id = Session["CurrentMediaId"] != null ? (int)Session["CurrentMediaId"] : 0;
@@ -195,7 +210,7 @@ namespace Controllers
             }
             return RedirectToAction("Details/" + id);
         }
-        [Authorize(Roles = "Writer")]
+        [UserAccess(Access.Write)]
         public ActionResult Delete()
         {
             int id = Session["CurrentMediaId"] != null ? (int)Session["CurrentMediaId"] : 0;
