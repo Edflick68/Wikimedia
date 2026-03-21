@@ -140,6 +140,7 @@ namespace Controllers
         [HttpPost]
         [ValidateAntiForgeryToken()]
         [Authorize(Roles = "Writer")]
+        
         public ActionResult Create(Media media)
         {
             DB.Medias.Add(media);
@@ -165,8 +166,10 @@ namespace Controllers
         {
             int id = Session["CurrentMediaId"] != null ? (int)Session["CurrentMediaId"] : 0;
 
+            int connectedUser = Models.User.ConnectedUser.Id;
             Media storedMedia = DB.Medias.Get(id);
-            if (storedMedia != null)
+
+            if (storedMedia != null && connectedUser == storedMedia.UserId)
             {
                 media.Id = id;
                 media.LastModified = DateTime.Now;
@@ -178,7 +181,11 @@ namespace Controllers
         public ActionResult Delete()
         {
             int id = Session["CurrentMediaId"] != null ? (int)Session["CurrentMediaId"] : 0;
-            if (id != 0)
+
+            int connectedUser = Models.User.ConnectedUser.Id;
+            Media storedMedia = DB.Medias.Get(id);
+
+            if (id != 0 && connectedUser == storedMedia.UserId)
             {
                 DB.Medias.Delete(id);
             }
