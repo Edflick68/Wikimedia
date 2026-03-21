@@ -5,7 +5,7 @@
     string searchString = Session["SearchString"] != null ? (string)Session["SearchString"] : "";
     int currentMediaId = Session["CurrentMediaId"] != null ? (int)Session["CurrentMediaId"] : 0;
     string currentMediaTitle = Session["CurrentMediaTitle"] != null ? (string)Session["CurrentMediaTitle"] : "";
-    int selectedCategory = Session["CurrentSelectedCategory"] != null ? (int)Session["CurrentSelectedCategory"] : "";
+    string selectedCategory = Session["CurrentSelectedCategory"] != null ? (string)Session["CurrentSelectedCategory"] : "";
     bool sortByTitle = Session["SortByTitle"] != null ? (bool)Session["SortByTitle"] : true;
     bool sortByDate = Session["SortByDate"] != null ? (bool)Session["SortByDate"] : true;
     string checkSortByTitle = sortByTitle ? "fa-check" : "";
