@@ -16,7 +16,7 @@ namespace Wikimedia.Models
         public string YoutubeId { get; set; }
         public DateTime PublishDate { get; set; } = DateTime.Now;
         public DateTime LastModified { get; set; }
-        public int UserId { get; set; } = 0;
+        public int UserId { get; set; } 
         public bool Shared { get; set; } = true;
 
         [JsonIgnore]
