@@ -238,5 +238,29 @@ namespace Controllers
                 return Content("");
             return Content(media.LastModified.Ticks.ToString());
         }
+        public JsonResult ToggleLike(int id) 
+        {
+            int userId = Models.User.ConnectedUser.Id;
+            Media media = DB.Medias.Get(id);
+
+            if(media == null)
+                return Json(new {succes  = false});
+
+            var existing = DB.Likes.ToList().FirstOrDefault(c => c.MediaId == id && c.UserId == userId);
+            if(existing == null)
+            {
+                DB.Likes.Add(new Like() { MediaId = id, UserId = userId });
+            }
+            else
+            {
+                DB.Likes.Delete(existing.Id);
+            }
+
+            media.LastModified = DateTime.Now;
+            DB.Medias.Update(media);
+
+            DB.Medias.HasChanged = true;
+            return Json(new { succes = true });
+        }
     }
 }

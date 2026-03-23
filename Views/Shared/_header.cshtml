@@ -1,4 +1,6 @@
-﻿@{
+﻿using Wikimedia.Models;
+using Wikimedia.DAL;
+@{
     string controller = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString().ToLower();
     string action = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().ToLower();
     bool search = Session["Search"] != null ? (bool)Session["Search"] : false;
@@ -12,7 +14,7 @@
     string checkSortByDate = sortByDate ? "" : "fa-check";
     var MediaList = (List<Wikimedia.Models.Media>)Session["Media"];
     bool SearchAscending = Session["SortAscending"] != null ? (bool)Session["SortAscending"] : true;
-    int currentId = 0; 
+    var currentMedia = currentMediaId > 0 ? DB.Medias.Get(currentMediaId) : null;
     bool userConnected = Models.User.ConnectedUser != null;
     bool userIsAdmin = userConnected ? Models.User.ConnectedUser.IsAdmin : false;
     bool userCanWrite = userConnected ? Models.User.ConnectedUser.CanWrite : false;
@@ -113,6 +115,13 @@
             case "details":
                 <div class="pageTitle">Détails</div>
                 <div id="mainMenuPanel" class="menu">
+                    if(@currentMedia != null)
+                    {
+                    <span class="likeCount" title="@string.Join(",",currentMedia.Likes.Select(l => DB.Users.Get(l.UserId).Name))">@currentMedia.Likes.Count</span>
+                    <i class="cmdIcon fa-regular fa-thumbs-up toggleLikeCmd @(currentMedia.Likes.Any(l => l.UserId == Models.User.ConnectedUser.Id) ? "fa-solid" : "fa-regular")"
+                       title="J'aime"
+                       onclick="toggleLike(@currentMedia.Id)"></i>
+                    }
                     <a href="/@controller/Edit/@currentMediaId" class="cmdIcon fa fa-pen-to-square" title="Modifier..."></a>
                     <i class="cmdIcon fa fa-trash-can"
                        title="Effacer"

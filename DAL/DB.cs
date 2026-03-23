@@ -47,5 +47,8 @@ namespace DAL
         static public Repository<RenewPasswordCommand> RenewPasswordCommands { get; set; }
             = new Repository<RenewPasswordCommand>();
 
+        static public Repository<Like> Likes { get; set; }
+            = new Repository<Like>(); 
+
     }
 }

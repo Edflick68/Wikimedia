@@ -62,3 +62,12 @@
             });
     }, 5000);
 </script>
+<script>
+    function toggleLike(id) {
+        fetch('Media/ToggleLike/' + id, { method: 'POST' })
+            .then(r => r.json())
+            .then(() => {
+
+            });
+    }
+</script>
