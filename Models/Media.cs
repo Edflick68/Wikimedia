@@ -16,10 +16,10 @@ namespace Wikimedia.Models
         public string YoutubeId { get; set; }
         public DateTime PublishDate { get; set; } = DateTime.Now;
         public DateTime LastModified { get; set; }
-        public int UserId {  get; set; }
-        public bool Shared { get; set; }
+        public int UserId { get; set; } = 0;
+        public bool Shared { get; set; } = true;
 
         [JsonIgnore]
-        public User Publisher => DB.Users.Get(UserId);
+        public User Publisher => DB.Users.Get(UserId).Copy();
     }
 }
