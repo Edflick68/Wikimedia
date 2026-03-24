@@ -23,6 +23,7 @@ namespace Controllers
             if (Session["Categories"] == null) Session["Categories"] = DB.MediasCategories();
             if (Session["SortByTitle"] == null) Session["SortByTitle"] = true;
             if (Session["SortByDate"] == null) Session["SortByDate"] = true;
+            if (Session["SortByLikes"] == null) Session["SortByLikes"] = true;
             if (Session["SortAscending"] == null) Session["SortAscending"] = false;
             ValidateSelectedCategory();
         }
@@ -135,6 +136,13 @@ namespace Controllers
         {
             Session["SortByDate"] = true;
             Session["SortByTitle"] = false;
+            return RedirectToAction("List");
+        }
+        public ActionResult SortByLikes()
+        {
+            Session["SortByLikes"] = true;
+            Session["SortByTitle"] = false;
+            Session["SortByDate"] = false;
             return RedirectToAction("List");
         }
 

@@ -10,8 +10,10 @@ using Wikimedia.DAL;
     string selectedCategory = Session["CurrentSelectedCategory"] != null ? (string)Session["CurrentSelectedCategory"] : "";
     bool sortByTitle = Session["SortByTitle"] != null ? (bool)Session["SortByTitle"] : true;
     bool sortByDate = Session["SortByDate"] != null ? (bool)Session["SortByDate"] : true;
+    bool sortByLikes = Session["SortByLikes"] != null ? (bool)Session["SortByLikes"] : true;
     string checkSortByTitle = sortByTitle ? "fa-check" : "";
     string checkSortByDate = sortByDate ? "" : "fa-check";
+    string checkSortByLikes = sortByLikes ? "" : "fa-check";
     var MediaList = (List<Wikimedia.Models.Media>)Session["Media"];
     bool SearchAscending = Session["SortAscending"] != null ? (bool)Session["SortAscending"] : true;
     var currentMedia = currentMediaId > 0 ? DB.Medias.Get(currentMediaId) : null;
@@ -101,6 +103,10 @@ using Wikimedia.DAL;
                             <div class="dropdown-item item-layout">
                                 <i class="menuIcon fa @checkSortByDate"></i>
                                 <a href="/@controller/SortByDate">Trier par date</a>
+                            </div>
+                            <div class="dropdown-item item-layout">
+                                <i class="menuIcon fa @checkSortByDate"></i>
+                                <a href="/@controller/SortByLikes">Trier par j'aime</a>
                             </div>
 
                             <div class="dropdown-divider"></div>
