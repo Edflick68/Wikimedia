@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Wikimedia.Models;
 
 namespace Models
 {
@@ -19,6 +20,19 @@ namespace Models
 
         public int OwnerId { get; set; } = 1;
         public bool Shared { get; set; } = true;
+        public List<Like> Likes
+        {
+            get { return DB.Likes.ToList().Where(l => l.MediaId == Id).ToList(); }
+        }
+        public bool LikedByConnectedUser
+        {
+            get
+            {
+                var user = User.ConnectedUser;
+                if (user == null) return false;
+                return DB.Likes.ToList().Any(l => l.MediaId == Id && l.UserId == user.Id);
+            }
+        }
         [JsonIgnore]
         public User Owner => DB.Users.Get(OwnerId).Copy();
 

@@ -39,4 +39,26 @@
             }
         }
     </script>
+    <script>
+    const mediaId = @Model.Id;
+
+    setInterval(() => {
+        fetch('/Media/GetLastModified/' + mediaId)
+            .then(r => r.text())
+            .then(serverValue => {
+                if (serverValue) {
+                    location.reload();
+                }
+            });
+    }, 5000);
+    </script>
+    <script>
+        function toggleLike(id) {
+            fetch('Medias/ToggleLike/' + id, { method: 'POST' })
+                .then(r => r.json())
+                .then(() => {
+
+                });
+        }
+    </script>
 }
