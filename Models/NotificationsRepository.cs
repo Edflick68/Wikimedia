@@ -11,7 +11,7 @@ namespace Models
     {
         public void Push(int targetUserId, string Message)
         {
-            User targetUser = DB.Users.Get(targetUserId);
+            User targetUser = DB.Users.Get(targetUserId); 
             if (User.ConnectedUser != null && targetUser.Notify)
                 Add(new Notification { TargetUserId = targetUserId, SourceUserId = User.ConnectedUser.Id, Message = Message });
         }

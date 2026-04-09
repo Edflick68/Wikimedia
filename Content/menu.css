@@ -4,11 +4,23 @@
     margin-right: 8px;
     cursor: pointer;
     text-decoration: none;
-}
 
-    .cmdIcon:hover {
+    &:hover {
         color: rgb(103, 165, 247);
     }
+}
+
+.cmdIconSmall {
+    font-size: 1rem;
+    color: #aaa;
+    margin-left: 8px;
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover {
+        color: rgb(103, 165, 247);
+    }
+} 
 
 .menuIcon {
     font-size: 1.2rem;
@@ -20,14 +32,16 @@
     display: grid;
     grid-template-columns: 3em auto 30px;
     align-items: center;
-}
 
-    .headerMenu a {
+    & a {
         text-decoration: none;
     }
+}
+
+    
 
 .pageTitle {
-    font-size: 2em;
+    font-size: 1.5em;
     text-align: left;
     font-weight:bold;
 }
@@ -51,7 +65,7 @@
 
 .item-layout {
     display: grid !important;
-    grid-template-columns: 38px auto !important;
+    grid-template-columns: 40px auto !important;
     align-items: center;
     cursor:pointer;
 }

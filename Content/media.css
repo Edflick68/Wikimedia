@@ -1,8 +1,7 @@
-﻿.mediaListLayout {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    flex-direction: row;
+.mediaListLayout {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    gap: 6px !important;
 }
 
     .mediaListLayout a {
@@ -15,23 +14,39 @@
             background-color: aliceblue;
         }
 
+@media screen and (max-width: 800px) {
+    .mediaListLayout {
+        grid-template-columns: 49.75% 49.75%;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .mediaListLayout {
+        grid-template-columns: 100%;
+    }
+}
+
 .mediaLayout {
-    display: flex;
-    align-items: center;
-    width: 330px;
-    gap: 6px;
-    font-size: 1.2em;
-    color: black;
+    border: 0.1px solid #ccc;
+    border-radius: 5px;
+
+    &:hover {
+        box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    }
 }
 
 .mediaThumbnail {
-    width: 300px;
+    width: 100% !important;
     aspect-ratio: 16/9;
-    border-radius: 6px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom: 0.1px solid #ccc;
+    background-size: cover;
+    background-position: center;
 }
 
 .mediaThumbnailBig {
-    width: 100%;
+    width: 100% !important;
     aspect-ratio: 16/9;
     border-radius: 6px;
 }
@@ -39,30 +54,13 @@
 .mediaPlayerBig {
     aspect-ratio: 16/9;
     width: 100% !important;
-    max-width: 800px !important;
 }
 
 .description {
     font-size: 1em !important;
 }
 
-
-.UserSmallAvatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 35px;
-    background-size: cover !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
+.highlight {
+    background-color: yellow;
 }
-.UserMediumAvatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 35px;
-    background-size: cover !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-}
-.transparentBackground {
-    background-color: rgba(255, 255, 255, 0.5);
-}
+  

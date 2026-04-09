@@ -56,3 +56,9 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.footerPanel {
+    display: grid !important;
+    grid-template-columns: auto 100px 24px !important;
+    align-items: center;
+}

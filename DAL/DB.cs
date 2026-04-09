@@ -1,11 +1,10 @@
-﻿using Models;
+﻿using EmailHandling;
+using Models;
 using PhotosManager.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Web.Hosting;
-using Wikimedia.Models;
-using EmailHandling;
 
 namespace DAL
 {
@@ -13,22 +12,11 @@ namespace DAL
     {
         #region singleton setup
         private static readonly DB instance = new DB();
-        public static DB Instance  { get { return instance; } }
+        public static DB Instance { get { return instance; } }
         #endregion
 
-        public static Repository<Media> Medias { get; set; } = new Repository<Media>();
-        public static List<string> MediasCategories()
-        {
-            List<string> Categories = new List<string>();
-            foreach (Media media in Medias.ToList().OrderBy(m => m.Category))
-            {
-                if (Categories.IndexOf(media.Category) == -1)
-                {
-                    Categories.Add(media.Category);
-                }
-            }
-            return Categories;
-        }
+        public static MediasRepository Medias { get; set; } = new MediasRepository();
+        
         static public UsersRepository Users { get; set; }
             = new UsersRepository();
 
@@ -46,9 +34,5 @@ namespace DAL
 
         static public Repository<RenewPasswordCommand> RenewPasswordCommands { get; set; }
             = new Repository<RenewPasswordCommand>();
-
-        static public Repository<Like> Likes { get; set; }
-            = new Repository<Like>(); 
-
     }
 }

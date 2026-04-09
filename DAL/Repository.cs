@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.EnterpriseServices;
 using System.IO;
 using System.Linq;
@@ -11,16 +12,37 @@ using System.Web.Hosting;
 
 namespace DAL
 {
+    ///////////////////////////////////////////////////////////////
+    // Ce patron de classe permet de stocker dans un fichier JSON
+    // une collection d'objects. Ces derniers doivent posséder
+    // la propriété int Id {get; set;}
+    // Après l'instanciation il faut invoquer la méthode Init
+    // pour fournir le chemin d'accès du fichier JSON.
+    // 
+    // Tous les membres annotés avec [asset(folder, defaultValue)] 
+    // seront traités en tant que données hors BD
+    //
+    // Auteur : Nicolas Chourot
+    // date: Janvier 2025
+    ///////////////////////////////////////////////////////////////
     public class Repository<T>
     {
         #region "Méthodes et propritées privées"
+        // Pour indiquer si une transaction est en cours
         static bool TransactionOnGoing = false;
+        // Pour la gestion d'imbrications de transactions
         static int NestedTransactionsCount = 0;
+        // utilisé pour prévenir des conflits entre processus
         static private readonly Mutex mutex = new Mutex();
+        // cache des données du fichier JSON
         private List<T> dataList;
+        // chemin d'accès absolue du fichier JSON
         private string FilePath;
+        // Numéro de serie des données
         private string _SerialNumber;
+        // Gestion des images hors données
         private readonly ImageAsset<T> ImageAsset = new ImageAsset<T>();
+        // retourne la valeur de l'attribut attributeName de l'intance data de classe T
         private object GetAttributeValue(T data, string attributeName)
         {
             return data.GetType().GetProperty(attributeName).GetValue(data, null);
@@ -111,13 +133,23 @@ namespace DAL
         {
             get
             {
-                string key = this.GetType().Name;
-                if (((string)HttpContext.Current.Session[key] != _SerialNumber))
+                if (IsMarkedChanged)
                 {
-                    HttpContext.Current.Session[key] = _SerialNumber;
+                    HttpContext.Current.Session[this.GetType().Name] = _SerialNumber;
                     return true;
                 }
                 return false;
+            }
+        }
+        public bool IsMarkedChanged
+        {
+            get {
+                string name = this.GetType().Name;
+                string sn = (string)HttpContext.Current.Session[this.GetType().Name];
+                //Debug.WriteLine(name + " " + sn + " " + _SerialNumber + (sn != _SerialNumber).ToString());
+                if (string.IsNullOrEmpty(sn))
+                    HttpContext.Current.Session[name] = _SerialNumber;
+                return ((string)HttpContext.Current.Session[name] != _SerialNumber);
             }
         }
         public void BeginTransaction()

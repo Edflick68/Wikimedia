@@ -1,4 +1,5 @@
-﻿.selectionsGrid {
+﻿
+.selectionsGrid {
     display: flex;
     flex-flow: row;
     font-family: Courrier,monospace;
@@ -6,19 +7,19 @@
     /*border: 1px solid #ccc;
     border-radius: 6px;
     padding: 4px;*/
-    padding-top: 8px;
-    gap: 0px;
-    margin: 0px;
+    padding-top : 8px;
+    gap:0px;
+    margin:0px;
 }
 
 .HorSelectionsCMD {
-    margin: 0px;
+    margin:0px;
     display: flex;
     flex-direction: column;
     min-width: 40px;
     align-items: center;
     justify-content: center;
-    padding-right: 8px;
+    padding-right:8px;
 }
 
 .VerSelectionsCMD {
@@ -30,9 +31,8 @@
 }
 
 .AddSelectionx {
-    margin-left: 0px;
+    margin-left:0px;
 }
-
 .UnselectAll {
     margin-top: 6px;
     margin-bottom: 6px;
@@ -59,6 +59,7 @@
 }
 
 select option {
+
     text-overflow: ellipsis;
     overflow: hidden;
 }

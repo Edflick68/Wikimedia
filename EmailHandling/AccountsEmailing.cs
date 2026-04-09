@@ -59,7 +59,7 @@ namespace EmailHandling
             DB.UnverifiedEmails.Add(unverifiedEmail);
 
             string Link = @"<br/><a href='" + ActionURL + "?code=" + unverifiedEmail.VerificationCode + @"' >Confirmez votre inscription...</a>";
-
+           
             string Subject = ApplicationName + " - Vérification de courriel...";
 
             string Body = "Bonjour " + user.Name + @",<br/><br/>";
@@ -101,7 +101,7 @@ namespace EmailHandling
         }
         public static void SendEmailRenewPasswordCommand(string ActionURL, string email)
         {
-            User user = DB.Users.ToList().Where(u => u.Email == email).First();
+            User user = DB.Users.ToList().Where(u=> u.Email == email).First();
             if (user != null)
             {
                 RenewPasswordCommand renewPasswordCommand = new RenewPasswordCommand();

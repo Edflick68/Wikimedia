@@ -48,7 +48,7 @@ namespace Models
                 return user.Copy();
             return null;
         }
-
+        
         public override int Add(User user)
         {
             user.Password = HashPassword(user.Password);

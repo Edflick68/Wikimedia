@@ -11,8 +11,9 @@ namespace Wikimedia
     {
         public static string DefaultAction()
         {
-            return "/Media/List";
+            return "/Medias/List";
         }
+
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");

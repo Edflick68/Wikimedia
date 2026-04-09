@@ -42,7 +42,7 @@ namespace EmailHandling
             mail.To.Clear();
             mail.To.Add(new MailAddress(toEmail, toName, System.Text.Encoding.UTF8));
             mail.Subject = subject;
-            mail.Body = body;
+            mail.Body = body ;
             try
             {
                 client.Send(mail);

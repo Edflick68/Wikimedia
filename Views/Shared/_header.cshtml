@@ -1,38 +1,46 @@
-﻿using Wikimedia.Models;
-using Wikimedia.DAL;
-@{
+﻿@{
     string controller = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString().ToLower();
     string action = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().ToLower();
     bool search = Session["Search"] != null ? (bool)Session["Search"] : false;
     string searchString = Session["SearchString"] != null ? (string)Session["SearchString"] : "";
     int currentMediaId = Session["CurrentMediaId"] != null ? (int)Session["CurrentMediaId"] : 0;
-    string currentMediaTitle = Session["CurrentMediaTitle"] != null ? (string)Session["CurrentMediaTitle"] : "";
+    string currentMediaTitle = Session["currentMediaTitle"] != null ? (string)Session["currentMediaTitle"] : "";
     string selectedCategory = Session["CurrentSelectedCategory"] != null ? (string)Session["CurrentSelectedCategory"] : "";
-    bool sortByTitle = Session["SortByTitle"] != null ? (bool)Session["SortByTitle"] : true;
-    bool sortByDate = Session["SortByDate"] != null ? (bool)Session["SortByDate"] : true;
-    bool sortByLikes = Session["SortByLikes"] != null ? (bool)Session["SortByLikes"] : true;
-    string checkSortByTitle = sortByTitle ? "fa-check" : "";
-    string checkSortByDate = sortByDate ? "" : "fa-check";
-    string checkSortByLikes = sortByLikes ? "" : "fa-check";
-    var MediaList = (List<Wikimedia.Models.Media>)Session["Media"];
-    bool SearchAscending = Session["SortAscending"] != null ? (bool)Session["SortAscending"] : true;
-    var currentMedia = currentMediaId > 0 ? DB.Medias.Get(currentMediaId) : null;
+
+    var Categories = (List<string>)Session["Categories"];
+
+    /* Sort setup */
+    var mediaSortBy = Session["MediaSortBy"] != null ? (Models.MediaSortBy)Session["MediaSortBy"] : MediaSortBy.PublishDate;
+    bool SearchAscending = Session["SortAscending"] != null ? (bool)Session["SortAscending"] : false;
+
+    string checkSortByTitle = mediaSortBy == MediaSortBy.Title ? "fa-check" : "";
+    string checkSortByDate = mediaSortBy == MediaSortBy.PublishDate ? "fa-check" : "";
+
+    string iconSortBy = "";
+    string iconSortByTitle = "";
+
+    switch (mediaSortBy)
+    {
+        case MediaSortBy.Title: iconSortBy = "fa-solid fa-t"; iconSortByTitle = "Tri des vidéos par titre"; break;
+        case MediaSortBy.PublishDate: iconSortBy = "fa-regular fa-calendar"; iconSortByTitle = "Tri des vidéos par date de publication"; break;
+    }
+
     bool userConnected = Models.User.ConnectedUser != null;
     bool userIsAdmin = userConnected ? Models.User.ConnectedUser.IsAdmin : false;
     bool userCanWrite = userConnected ? Models.User.ConnectedUser.CanWrite : false;
+
     string index = RouteConfig.DefaultAction();
 }
 
 <div class="section roundedBorder">
     <div class="headerMenu">
-        <a class="siteIcon" href="/media/list"></a>
+        <a class="siteIcon" href="/Medias/list"></a>
+        <div class="pageTitle">@ViewBag.PageTitle</div>
+        <!-- Direct action context command icons -->
         @switch (action)
         {
-            case "login":
-                <div class="pageTitle">Connexion</div>
-                break;
+            case "login": break;
             case "subscribe":
-                <div class="pageTitle">S'inscrire</div>
                 <div id="mainMenuPanel" class="menu">
                     <i class="cmdIcon submitCmd fa fa-circle-check" title="Soumettre" onclick="document.getElementById('submit').click()"></i>
                     <a class="cmdIcon fa fa-square-xmark" title="Annuler" onclick="history.back()"></a>
@@ -44,13 +52,16 @@ using Wikimedia.DAL;
                     <a class="cmdIcon fa fa-square-xmark" title="Annuler" onclick="history.back()"></a>
                 </div>
                 break;
+
             case "list":
-                <div class="pageTitle">Wikimedia</div>
                 <div id="mainMenuPanel" class="menu">
                     @if (userCanWrite)
                     {
                         <a href="/@controller/Create" class="cmdIcon fa fa-circle-plus" title="Ajouter..."></a>
                     }
+
+                    <a href="/@controller/ToggleMediaSort" class="cmdIcon @iconSortBy" title="@iconSortByTitle"></a>
+
                     @if (SearchAscending)
                     {
                         <a href="/@controller/ToggleSort" id="cmdToggleSearch" class="cmdIcon fa fa-arrow-down-short-wide" title="Tri ascendant..."></a>
@@ -59,19 +70,26 @@ using Wikimedia.DAL;
                     {
                         <a href="/@controller/ToggleSort" id="cmdToggleSearch" class="cmdIcon fa fa-arrow-up-wide-short" title="Tri descendant..."></a>
                     }
+
+                    <a href="/@controller/ToggleSearch" id="cmdToggleSearch" class="cmdIcon fa fa-search" title="Recherche..."></a>
+                    <!-- Dropdown menu -->
                     <div id="menu" class="dropdown ms-auto">
+                        <!-- Menu acces icon -->
                         <div data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="cmdIcon fa fa-bars" title="Menu"></i>
                         </div>
+                        <!-- Menu items -->
                         <div class="dropdown-menu noselect" id="DDMenu">
+
                             <div class="dropdown-item item-layout">
                                 <i class="menuIcon fa fa-address-card"></i>
                                 <a href="/Accounts/EditProfil">Profil...</a>
                             </div>
                             <div class="dropdown-item item-layout">
                                 <i class="menuIcon fa fa-sign-out"></i>
-                                <a href="/Accounts/Login">Déconnexion...</a>
+                                <a href="/Accounts/Logout">Déconnexion...</a>
                             </div>
+
                             @if (userIsAdmin)
                             {
                                 <div class="dropdown-divider"></div>
@@ -96,20 +114,19 @@ using Wikimedia.DAL;
                                 </div>
                             }
 
-                            <div class="dropdown-divider"></div><div class="dropdown-item item-layout">
+                            <div class="dropdown-divider"></div>
+
+                            <div class="dropdown-item item-layout">
+                                <i class="menuIcon fa @checkSortByDate"></i>
+                                <a href="/Medias/SetMediaSortBy?mediaSortBy=@MediaSortBy.PublishDate">Trier par date</a>
+                            </div>
+                            <div class="dropdown-item item-layout">
                                 <i class="menuIcon fa @checkSortByTitle"></i>
-                                <a href="/@controller/SortByTitle">Trier par titre</a>
-                            </div>
-                            <div class="dropdown-item item-layout">
-                                <i class="menuIcon fa @checkSortByDate"></i>
-                                <a href="/@controller/SortByDate">Trier par date</a>
-                            </div>
-                            <div class="dropdown-item item-layout">
-                                <i class="menuIcon fa @checkSortByDate"></i>
-                                <a href="/@controller/SortByLikes">Trier par j'aime</a>
+                                <a href="/Medias/SetMediaSortBy?mediaSortBy=@MediaSortBy.Title">Trier par titre</a>
                             </div>
 
                             <div class="dropdown-divider"></div>
+
                             <div class="dropdown-item item-layout">
                                 <i class="menuIcon fa fa-info-circle"></i>
                                 <a href="/@controller/About">À propos...</a>
@@ -119,46 +136,40 @@ using Wikimedia.DAL;
                 </div>
                 break;
             case "details":
-                <div class="pageTitle">Détails</div>
                 <div id="mainMenuPanel" class="menu">
-                    if(@currentMedia != null)
+                    @if ((bool)Session["UserCanEditCurrentMedia"] && userCanWrite)
                     {
-                    <span class="likeCount" title="@string.Join(",",currentMedia.Likes.Select(l => DB.Users.Get(l.UserId).Name))">@currentMedia.Likes.Count</span>
-                    <i class="cmdIcon fa-regular fa-thumbs-up toggleLikeCmd @(currentMedia.Likes.Any(l => l.UserId == Models.User.ConnectedUser.Id) ? "fa-solid" : "fa-regular")"
-                       title="J'aime"
-                       onclick="toggleLike(@currentMedia.Id)"></i>
+                        <a href="/@controller/Edit" class="cmdIcon fa fa-pen-to-square" title="Modifier..."></a>
+                        <i class="cmdIcon fa fa-trash-can"
+                           title="Effacer"
+                           onclick="bootbox.confirm(`<b style=color:red>Effacer le Media : </b><h3>@currentMediaTitle?</h3>`, function(result){ if (result) window.location = '/@controller/Delete'; })">
+                        </i>
                     }
-                    <a href="/@controller/Edit/@currentMediaId" class="cmdIcon fa fa-pen-to-square" title="Modifier..."></a>
-                    <i class="cmdIcon fa fa-trash-can"
-                       title="Effacer"
-                       onclick="bootbox.confirm(`<b style=color:red>Effacer le contact : </b><h3>@currentMediaTitle?</h3>`, function(result){ if (result) window.location = '/@controller/Delete'; })">
-                    </i>
                     <a href="/@controller/List" class="cmdIcon fa fa-square-xmark" title="retour"></a>
                 </div>
                 break;
             case "create":
-                <div class="pageTitle">Ajout</div>
-                <div id="mainMenuPanel" class="menu">
-                    <i class="cmdIcon submitCmd fa fa-circle-check" title="Soumettre" onclick="document.getElementById('submit').click()"></i>
-                    <a href="/@controller/List" class="cmdIcon fa fa-square-xmark" title="Annuler"></a>
-                </div>
+                if (userCanWrite)
+                {
+                    <div id="mainMenuPanel" class="menu">
+                        <i class="cmdIcon submitCmd fa fa-circle-check" title="Soumettre" onclick="document.getElementById('submit').click()"></i>
+                        <a href="/@controller/List" class="cmdIcon fa fa-square-xmark" title="Annuler"></a>
+                    </div>
+                }
                 break;
             case "edit":
-                <div class="pageTitle">Modification</div>
-                <div id="mainMenuPanel" class="menu">
-                    <i class="cmdIcon submitCmd fa fa-circle-check" title="Soumettre" onclick="document.getElementById('submit').click()"></i>
-                    <a href="/@controller/Details/@currentMediaId" class="cmdIcon fa fa-square-xmark" title="Annuler"></a>
-                </div>
-                break;
-            case "about":
-                <div class="pageTitle">À propos</div>
-                <div id="mainMenuPanel" class="menu">
-                    <a href="/@controller/List" class="cmdIcon fa fa-square-xmark" title="Retour"></a>
-                </div>
+                if (userCanWrite)
+                {
+                    <div id="mainMenuPanel" class="menu">
+                        <i class="cmdIcon submitCmd fa fa-circle-check" title="Soumettre" onclick="document.getElementById('submit').click()"></i>
+                        <a href="/@controller/Details/@currentMediaId" class="cmdIcon fa fa-square-xmark" title="Annuler"></a>
+                    </div>
+                }
                 break;
             case "loginsjournal":
             case "eventsjournal":
             case "manageusers":
+            case "about":
                 <div id="mainMenuPanel" class="menu">
                     <a href="@index" class="cmdIcon fa fa-square-xmark" title="Retour"></a>
                 </div>
@@ -167,14 +178,14 @@ using Wikimedia.DAL;
 
     </div>
 </div>
-@if (action == "list" && search)
+@if (search && controller == "medias" && action == "list")
 {
     <div class="flex">
         <input type="search" id="searchInput" class="section roundedBorder flexItem" value="@searchString" placeholder="Recherche...">
-        <div id="CategorySelectPanel" class="flexItem">
-
+        <div id="categorySelectPanel" class="flexItem">
+            <!-- Dynamically refreshed -->
+            @{ Html.RenderPartial("GetMediasCategoriesList"); }
         </div>
-
     </div>
 }
 

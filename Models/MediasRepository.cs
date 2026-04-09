@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Wikimedia.Models
+namespace Models
 {
     public class MediasRepository : Repository<Media>
     {

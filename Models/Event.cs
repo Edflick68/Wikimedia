@@ -15,6 +15,6 @@ namespace Models
         public int UserId { get; set; }
         public string Action { get; set; }
         [JsonIgnore] public User User => DB.Users.Get(UserId);
-
+           
     }
 }
