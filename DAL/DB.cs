@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Web.Hosting;
+using Wikimedia.Models;
 
 namespace DAL
 {
@@ -34,5 +35,7 @@ namespace DAL
 
         static public Repository<RenewPasswordCommand> RenewPasswordCommands { get; set; }
             = new Repository<RenewPasswordCommand>();
+        static public Repository<Like> Likes { get; set; }
+            = new Repository<Like>();
     }
 }

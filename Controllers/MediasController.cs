@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
+using Wikimedia.Models;
 using static Controllers.AccessControl;
 
 [UserAccess(Access.View)]
@@ -25,6 +26,7 @@ public class MediasController : Controller
         if (Session["Categories"] == null) Session["Categories"] = DB.Medias.MediasCategories();
         if (Session["SortByTitle"] == null) Session["SortByTitle"] = true;
         if (Session["MediaSortBy"] == null) Session["MediaSortBy"] = MediaSortBy.PublishDate;
+        if (Session["SortByLikes"] == null) Session["SortByLikes"] = MediaSortBy.Likes;
         if (Session["SortAscending"] == null) Session["SortAscending"] = false;
         ValidateSelectedCategory();
 
@@ -74,6 +76,8 @@ public class MediasController : Controller
                         result = result.OrderBy(c => c.Title); break;
                     case MediaSortBy.PublishDate:
                         result = result.OrderBy(c => c.PublishDate); break;
+                    case MediaSortBy.Likes:
+                        result = result.OrderBy(c => c.Likes); break;
                 }
             }
             else
@@ -84,6 +88,8 @@ public class MediasController : Controller
                         result = result.OrderByDescending(c => c.Title); break;
                     case MediaSortBy.PublishDate:
                         result = result.OrderByDescending(c => c.PublishDate); break;
+                    case MediaSortBy.Likes:
+                        result = result.OrderByDescending(c => c.Likes); break;
                 }
             }
             if (result.Count() < nbItems + index)
@@ -380,6 +386,26 @@ public class MediasController : Controller
         // Response json value true if name is used in other Medias than the current Media
         return Json(DB.Medias.ToList().Where(c => c.YoutubeId == YoutubeId && c.Id != id).Any(),
                     JsonRequestBehavior.AllowGet /* must have for CORS verification by client browser */);
+    }
+    public JsonResult ToggleLike(int id)
+    {
+        int userId = Models.User.ConnectedUser.Id;
+        Media media = DB.Medias.Get(id);
+
+        if (media == null)
+            return Json(new { succes = false });
+
+        var existing = DB.Likes.ToList().FirstOrDefault(c => c.MediaId == id && c.UserId == userId);
+        if (existing == null)
+        {
+            DB.Likes.Add(new Like() { MediaId = id, UserId = userId });
+            return Json(new { succes = true });
+        }
+        else
+        {
+            DB.Likes.Delete(existing.Id);
+            return Json(new { succes = true });
+        }
     }
 
 }
