@@ -3,6 +3,7 @@
     string action = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().ToLower();
     bool search = Session["Search"] != null ? (bool)Session["Search"] : false;
     string searchString = Session["SearchString"] != null ? (string)Session["SearchString"] : "";
+    var currentMedia = Session["CurrentMedia"] != null ? (Models.Media)Session["CurrentMedia"] : null;
     int currentMediaId = Session["CurrentMediaId"] != null ? (int)Session["CurrentMediaId"] : 0;
     string currentMediaTitle = Session["currentMediaTitle"] != null ? (string)Session["currentMediaTitle"] : "";
     string selectedCategory = Session["CurrentSelectedCategory"] != null ? (string)Session["CurrentSelectedCategory"] : "";
@@ -145,6 +146,11 @@
                 <div id="mainMenuPanel" class="menu">
                     @if ((bool)Session["UserCanEditCurrentMedia"] && userCanWrite)
                     {
+                        <span class="likeCount" title="@string.Join(",",currentMedia.Likes.Select(l => DB.Users.Get(l.UserId).Name))">@currentMedia.Likes.Count</span>
+                        <i class="cmdIcon fa-regular fa-thumbs-up toggleLikeCmd @(currentMedia.Likes.Any(l => l.UserId == Models.User.ConnectedUser.Id) ? "fa-solid" : "fa-regular")"
+                         title="J'aime"
+                         onclick="toggleLike(@currentMediaId)"></i>
+                     }
                         <a href="/@controller/Edit" class="cmdIcon fa fa-pen-to-square" title="Modifier..."></a>
                         <i class="cmdIcon fa fa-trash-can"
                            title="Effacer"
