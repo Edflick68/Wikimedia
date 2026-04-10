@@ -1,275 +1,388 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>
-    </ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E69DD6E9-FA47-4B83-B063-C4F47D7FF4DD}</ProjectGuid>
-    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Wikimedia</RootNamespace>
-    <AssemblyName>Wikimedia</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress />
-    <IISExpressSSLPort>44385</IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
-    <IISExpressUseClassicPipelineMode />
-    <UseGlobalApplicationHostFile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\lib\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>packages\Newtonsoft.Json.13.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Web.Entity" />
-    <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.Helpers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Mvc, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.AspNet.Mvc.5.3.0\lib\net45\System.Web.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.AspNet.Razor.3.3.0\lib\net45\System.Web.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.WebPages.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Abstractions" />
-    <Reference Include="System.Web.Routing" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Web.Services" />
-    <Reference Include="System.EnterpriseServices" />
-    <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>packages\Microsoft.Web.Infrastructure.2.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http">
-    </Reference>
-    <Reference Include="System.Net.Http.WebRequest">
-    </Reference>
-    <Reference Include="System.Web.Optimization">
-      <HintPath>packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
-    </Reference>
-    <Reference Include="WebGrease">
-      <Private>True</Private>
-      <HintPath>packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
-    </Reference>
-    <Reference Include="Antlr3.Runtime">
-      <Private>True</Private>
-      <HintPath>packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Models\Like.cs" />
-    <Compile Include="Models\MediasRepository.cs" />
-    <Compile Include="WebServices\Countries.cs" />
-    <Compile Include="WebServices\GeoLocation.cs" />
-    <Content Include="App_Assets\Users\5aa8957d-e980-4cac-b915-aaa63d0909f1.jpeg" />
-    <Content Include="App_Assets\Users\no_avatar.png" />
-    <Content Include="App_Data\iso-3166.txt" />
-    <Content Include="Content\Accounts.css" />
-    <Content Include="Content\Icons.css" />
-    <Content Include="Content\Selections.css" />
-    <Content Include="Content\popup.css" />
-    <Compile Include="Controllers\AccessControl.cs" />
-    <Compile Include="Controllers\AccountsController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\MediaController.cs" />
-    <Compile Include="Controllers\NotificationsController.cs" />
-    <Compile Include="DAL\AssetAttribute.cs" />
-    <Compile Include="DAL\DB.cs" />
-    <Compile Include="DAL\ImageAsset.cs" />
-    <Compile Include="DAL\Record.cs" />
-    <Compile Include="DAL\Repository.cs" />
-    <Compile Include="EmailHandling\AccountsEmailing.cs" />
-    <Compile Include="EmailHandling\SMTP.cs" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EmailView.cs" />
-    <Compile Include="Models\Event.cs" />
-    <Compile Include="Models\EventsRepository.cs" />
-    <Compile Include="Models\Login.cs" />
-    <Compile Include="Models\LoginCredential.cs" />
-    <Compile Include="Models\LoginsRepository.cs" />
-    <Compile Include="Models\Media.cs" />
-    <Compile Include="Models\Notification.cs" />
-    <Compile Include="Models\NotificationsRepository.cs" />
-    <Compile Include="Models\RenewPasswordView.cs" />
-    <Compile Include="Models\User.cs" />
-    <Compile Include="Models\UsersRepository.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\image-control.css" />
-    <Content Include="Content\jqui-custom-datepicker.css" />
-    <Content Include="Content\media.css" />
-    <Content Include="Content\menu.css" />
-    <Content Include="Content\site.css" />
-    <Content Include="Content\UI-Images\Abort.png" />
-    <Content Include="Content\UI-Images\Accept.png" />
-    <Content Include="Content\UI-Images\admin.png" />
-    <Content Include="Content\UI-Images\Loading_icon.gif" />
-    <Content Include="Content\UI-Images\Masked.png" />
-    <Content Include="Content\UI-Images\na.png" />
-    <Content Include="Content\UI-Images\OffLine.png" />
-    <Content Include="Content\UI-Images\OnLine.png" />
-    <Content Include="Content\UI-Images\PhotoCloudLogo.png" />
-    <Content Include="Content\UI-Images\power_user.png" />
-    <Content Include="Content\UI-Images\shared.png" />
-    <Content Include="Content\UI-Images\timeout.png" />
-    <Content Include="Content\UI-Images\user.png" />
-    <Content Include="Content\_layout.css" />
-    <Content Include="favicon.ico" />
-    <Content Include="Global.asax" />
-    <Content Include="Scripts\autoRefreshPanel.js" />
-    <Content Include="Scripts\bootbox.js" />
-    <Content Include="Scripts\image-control.js" />
-    <Content Include="Scripts\jquery-maskedinput.js" />
-    <Content Include="Scripts\selections.js" />
-    <Content Include="Scripts\session.js" />
-    <Content Include="Scripts\SiteNotificationsHandler.js" />
-    <Content Include="Scripts\SiteScripts.js" />
-    <Content Include="Scripts\validation.js" />
-    <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Media\About.cshtml" />
-    <Content Include="WebApp.png" />
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <Content Include="App_Data\Medias.json" />
-    <Content Include="App_Data\Users.json" />
-    <Content Include="App_Data\Events.json" />
-    <Content Include="App_Data\Logins.json" />
-    <Content Include="App_Data\Notifications.json" />
-    <Content Include="App_Data\RenewPasswordCommands.json" />
-    <Content Include="App_Data\UnverifiedEmails.json" />
-    <Content Include="App_Code\Helper.cshtml" />
-    <None Include="packages.config" />
-    <Content Include="Views\Shared\_header.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Media\Create.cshtml" />
-    <Content Include="Views\Media\MediaForm.cshtml" />
-    <Content Include="Views\Media\Edit.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Media\List.cshtml" />
-    <Content Include="Views\Media\GetMedia.cshtml" />
-    <Content Include="Views\Media\GetMediaCategories.cshtml" />
-    <Content Include="Views\Media\Details.cshtml" />
-    <Content Include="Views\Media\GetData.cshtml" />
-    <Content Include="Views\Media\ProtectedView.cshtml" />
-    <Content Include="Views\Accounts\EditProfil.cshtml" />
-    <Content Include="Views\Accounts\EventsJournal.cshtml" />
-    <Content Include="Views\Accounts\GetEventsList.cshtml" />
-    <Content Include="Views\Accounts\GetLoginsList.cshtml" />
-    <Content Include="Views\Accounts\GetUsers.cshtml" />
-    <Content Include="Views\Accounts\Login.cshtml" />
-    <Content Include="Views\Accounts\LoginsJournal.cshtml" />
-    <Content Include="Views\Accounts\ManageUsers.cshtml" />
-    <Content Include="Views\Accounts\ProfilForm.cshtml" />
-    <Content Include="Views\Accounts\RenewPassword.cshtml" />
-    <Content Include="Views\Accounts\RenewPasswordCommand.cshtml" />
-    <Content Include="Views\Accounts\Subscribe.cshtml" />
-    <None Include="Properties\PublishProfiles\Wikimedia20260313233304 - Web Deploy.pubxml" />
-  </ItemGroup>
-  <PropertyGroup>
-    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
-    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-  </PropertyGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
-  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
-    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
-  </Target>
-  <ProjectExtensions>
-    <VisualStudio>
-      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
-        <WebProjectProperties>
-          <UseIIS>True</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>56124</DevelopmentServerPort>
-          <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44385/</IISUrl>
-          <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
-          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
-        </WebProjectProperties>
-      </FlavorProperties>
-    </VisualStudio>
-  </ProjectExtensions>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+	<Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+	<PropertyGroup>
+		<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+		<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+		<ProductVersion>
+		</ProductVersion>
+		<SchemaVersion>2.0</SchemaVersion>
+		<ProjectGuid>{E69DD6E9-FA47-4B83-B063-C4F47D7FF4DD}</ProjectGuid>
+		<ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+		<OutputType>Library</OutputType>
+		<AppDesignerFolder>Properties</AppDesignerFolder>
+		<RootNamespace>Wikimedia</RootNamespace>
+		<AssemblyName>Wikimedia</AssemblyName>
+		<TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+		<MvcBuildViews>false</MvcBuildViews>
+		<UseIISExpress>true</UseIISExpress>
+		<Use64BitIISExpress />
+		<IISExpressSSLPort>44385</IISExpressSSLPort>
+		<IISExpressAnonymousAuthentication />
+		<IISExpressWindowsAuthentication />
+		<IISExpressUseClassicPipelineMode />
+		<UseGlobalApplicationHostFile />
+		<NuGetPackageImportStamp>
+		</NuGetPackageImportStamp>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>full</DebugType>
+		<Optimize>false</Optimize>
+		<OutputPath>bin\</OutputPath>
+		<DefineConstants>DEBUG;TRACE</DefineConstants>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>pdbonly</DebugType>
+		<Optimize>true</Optimize>
+		<OutputPath>bin\</OutputPath>
+		<DefineConstants>TRACE</DefineConstants>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+	</PropertyGroup>
+	<ItemGroup>
+		<Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+			<HintPath>packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+			<Private>True</Private>
+		</Reference>
+		<Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+			<HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\lib\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.CSharp" />
+		<Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+			<HintPath>packages\Newtonsoft.Json.13.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+			<Private>True</Private>
+		</Reference>
+		<Reference Include="System" />
+		<Reference Include="System.Data" />
+		<Reference Include="System.Drawing" />
+		<Reference Include="System.Web.DynamicData" />
+		<Reference Include="System.Web.Entity" />
+		<Reference Include="System.Web.ApplicationServices" />
+		<Reference Include="System.ComponentModel.DataAnnotations" />
+		<Reference Include="System.Core" />
+		<Reference Include="System.Data.DataSetExtensions" />
+		<Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+			<HintPath>packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.Helpers.dll</HintPath>
+			<Private>True</Private>
+		</Reference>
+		<Reference Include="System.Web.Mvc, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+			<HintPath>packages\Microsoft.AspNet.Mvc.5.3.0\lib\net45\System.Web.Mvc.dll</HintPath>
+			<Private>True</Private>
+		</Reference>
+		<Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+			<HintPath>packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+			<Private>True</Private>
+		</Reference>
+		<Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+			<HintPath>packages\Microsoft.AspNet.Razor.3.3.0\lib\net45\System.Web.Razor.dll</HintPath>
+			<Private>True</Private>
+		</Reference>
+		<Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+			<HintPath>packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.WebPages.dll</HintPath>
+			<Private>True</Private>
+		</Reference>
+		<Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+			<HintPath>packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+			<Private>True</Private>
+		</Reference>
+		<Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+			<HintPath>packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+			<Private>True</Private>
+		</Reference>
+		<Reference Include="System.Xml.Linq" />
+		<Reference Include="System.Web" />
+		<Reference Include="System.Web.Extensions" />
+		<Reference Include="System.Web.Abstractions" />
+		<Reference Include="System.Web.Routing" />
+		<Reference Include="System.Xml" />
+		<Reference Include="System.Configuration" />
+		<Reference Include="System.Web.Services" />
+		<Reference Include="System.EnterpriseServices" />
+		<Reference Include="Microsoft.Web.Infrastructure, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+			<Private>True</Private>
+			<HintPath>packages\Microsoft.Web.Infrastructure.2.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+		</Reference>
+		<Reference Include="System.Net.Http">
+		</Reference>
+		<Reference Include="System.Net.Http.WebRequest">
+		</Reference>
+		<Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+			<HintPath>packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+			<Private>True</Private>
+		</Reference>
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Include="app_start\BundleConfig.cs" />
+		<Compile Include="app_start\FilterConfig.cs" />
+		<Compile Include="app_start\RouteConfig.cs" />
+		<Compile Include="controllers\AccessControl.cs" />
+		<Compile Include="controllers\AccountsController.cs" />
+		<Compile Include="controllers\MediasController.cs" />
+		<Compile Include="controllers\NotificationsController.cs" />
+		<Compile Include="dal\AssetAttribute.cs" />
+		<Compile Include="dal\DB.cs" />
+		<Compile Include="dal\ImageAsset.cs" />
+		<Compile Include="dal\Record.cs" />
+		<Compile Include="dal\Repository.cs" />
+		<Compile Include="emailhandling\AccountsEmailing.cs" />
+		<Compile Include="emailhandling\SMTP.cs" />
+		<Compile Include="Global.asax.cs">
+			<DependentUpon>Global.asax</DependentUpon>
+		</Compile>
+		<Compile Include="models\EmailView.cs" />
+		<Compile Include="models\Event.cs" />
+		<Compile Include="models\EventsRepository.cs" />
+		<Compile Include="models\Login.cs" />
+		<Compile Include="models\LoginCredential.cs" />
+		<Compile Include="models\LoginsRepository.cs" />
+		<Compile Include="models\Media.cs" />
+		<Compile Include="models\MediasRepository.cs" />
+		<Compile Include="models\Notification.cs" />
+		<Compile Include="models\NotificationsRepository.cs" />
+		<Compile Include="models\RenewPasswordView.cs" />
+		<Compile Include="models\User.cs" />
+		<Compile Include="models\UsersRepository.cs" />
+		<Compile Include="Properties\AssemblyInfo.cs" />
+		<Compile Include="webservices\Countries.cs" />
+		<Compile Include="webservices\GeoLocation.cs" />
+	</ItemGroup>
+	<ItemGroup>
+		<Content Include="app_assets\Users\156ab756-729a-4dc9-ae1d-cdda8ccfd00d.jpeg" />
+		<Content Include="app_assets\Users\32705cf0-2e95-4362-bce7-7d77cb8d4b84.jpeg" />
+		<Content Include="app_assets\Users\3b8cc315-9869-4eeb-acb0-9f539b33758aX.jpeg" />
+		<Content Include="app_assets\Users\42c2ab89-8bff-457f-9592-0e2321b08511.jpeg" />
+		<Content Include="app_assets\Users\5aa8957d-e980-4cac-b915-aaa63d0909f1.jpeg" />
+		<Content Include="app_assets\Users\8b12ca6f-f732-440c-b7db-ccb07e1fdcae.png" />
+		<Content Include="app_assets\Users\a85fbd9a-5340-4053-a4c5-c7d491df7afe.jpeg" />
+		<Content Include="app_assets\Users\c244cacf-23e2-4699-8eaf-846ce036fa2e.png" />
+		<Content Include="app_assets\Users\cad0fd3c-826f-4c83-8cbc-4cf21dfa0040.png" />
+		<Content Include="app_assets\Users\de2aadf4-d27d-48bc-b5fd-888d729df8cc.png" />
+		<Content Include="app_assets\Users\no_avatar.png" />
+		<Content Include="app_data\iso-3166.txt" />
+		<Content Include="content\Accounts.css" />
+		<Content Include="content\Icons.css" />
+		<Content Include="content\image-control.css" />
+		<Content Include="content\jqui-custom-datepicker.css" />
+		<Content Include="content\media.css" />
+		<Content Include="content\menu.css" />
+		<Content Include="content\Selections.css" />
+		<Content Include="content\site.css" />
+		<Content Include="content\ui-images\Abort.png" />
+		<Content Include="content\ui-images\Accept.png" />
+		<Content Include="content\ui-images\admin.png" />
+		<Content Include="content\ui-images\Loading_icon.gif" />
+		<Content Include="content\ui-images\Masked.png" />
+		<Content Include="content\ui-images\na.png" />
+		<Content Include="content\ui-images\OffLine.png" />
+		<Content Include="content\ui-images\OnLine.png" />
+		<Content Include="content\ui-images\PhotoCloudLogo.png" />
+		<Content Include="content\ui-images\power_user.png" />
+		<Content Include="content\ui-images\shared.png" />
+		<Content Include="content\ui-images\timeout.png" />
+		<Content Include="content\ui-images\user.png" />
+		<Content Include="content\_layout.css" />
+		<Content Include="favicon.ico" />
+		<Content Include="Global.asax" />
+		<Content Include="packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll" />
+		<Content Include="packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.pdb" />
+		<Content Include="packages\Microsoft.AspNet.Mvc.5.3.0\lib\net45\fr\System.Web.Mvc.resources.dll" />
+		<Content Include="packages\Microsoft.AspNet.Mvc.5.3.0\lib\net45\fr\System.Web.Mvc.xml" />
+		<Content Include="packages\Microsoft.AspNet.Mvc.5.3.0\lib\net45\System.Web.Mvc.dll" />
+		<Content Include="packages\Microsoft.AspNet.Mvc.5.3.0\lib\net45\System.Web.Mvc.xml" />
+		<Content Include="packages\Microsoft.AspNet.Mvc.5.3.0\NET.icon.png" />
+		<Content Include="packages\Microsoft.AspNet.Mvc.5.3.0\NET_Library_EULA_ENU.txt" />
+		<Content Include="packages\Microsoft.AspNet.Mvc.fr.5.3.0\lib\net45\fr\System.Web.Mvc.resources.dll" />
+		<Content Include="packages\Microsoft.AspNet.Mvc.fr.5.3.0\lib\net45\fr\System.Web.Mvc.xml" />
+		<Content Include="packages\Microsoft.AspNet.Mvc.fr.5.3.0\NET.icon.png" />
+		<Content Include="packages\Microsoft.AspNet.Mvc.fr.5.3.0\NET_Library_EULA_FRA.txt" />
+		<Content Include="packages\Microsoft.AspNet.Razor.3.3.0\lib\net45\fr\System.Web.Razor.resources.dll" />
+		<Content Include="packages\Microsoft.AspNet.Razor.3.3.0\lib\net45\fr\system.web.razor.xml" />
+		<Content Include="packages\Microsoft.AspNet.Razor.3.3.0\lib\net45\System.Web.Razor.dll" />
+		<Content Include="packages\Microsoft.AspNet.Razor.3.3.0\lib\net45\System.Web.Razor.xml" />
+		<Content Include="packages\Microsoft.AspNet.Razor.3.3.0\NET.icon.png" />
+		<Content Include="packages\Microsoft.AspNet.Razor.3.3.0\NET_Library_EULA_ENU.txt" />
+		<Content Include="packages\Microsoft.AspNet.Razor.fr.3.3.0\lib\net45\fr\System.Web.Razor.resources.dll" />
+		<Content Include="packages\Microsoft.AspNet.Razor.fr.3.3.0\lib\net45\fr\system.web.razor.xml" />
+		<Content Include="packages\Microsoft.AspNet.Razor.fr.3.3.0\NET.icon.png" />
+		<Content Include="packages\Microsoft.AspNet.Razor.fr.3.3.0\NET_Library_EULA_FRA.txt" />
+		<Content Include="packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\fr\System.Web.Optimization.resources.dll" />
+		<Content Include="packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll" />
+		<Content Include="packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\system.web.optimization.xml" />
+		<Content Include="packages\Microsoft.AspNet.Web.Optimization.fr.1.1.3\lib\net40\fr\System.Web.Optimization.resources.dll" />
+		<Content Include="packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\fr\System.Web.Helpers.resources.dll" />
+		<Content Include="packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\fr\system.web.helpers.xml" />
+		<Content Include="packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\fr\System.Web.WebPages.Deployment.resources.dll" />
+		<Content Include="packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\fr\system.web.webpages.deployment.xml" />
+		<Content Include="packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\fr\System.Web.WebPages.Razor.resources.dll" />
+		<Content Include="packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\fr\system.web.webpages.razor.xml" />
+		<Content Include="packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\fr\System.Web.WebPages.resources.dll" />
+		<Content Include="packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\fr\system.web.webpages.xml" />
+		<Content Include="packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.Helpers.dll" />
+		<Content Include="packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.Helpers.xml" />
+		<Content Include="packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.WebPages.Deployment.dll" />
+		<Content Include="packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.WebPages.Deployment.xml" />
+		<Content Include="packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.WebPages.dll" />
+		<Content Include="packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.WebPages.Razor.dll" />
+		<Content Include="packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.WebPages.Razor.xml" />
+		<Content Include="packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.WebPages.xml" />
+		<Content Include="packages\Microsoft.AspNet.WebPages.3.3.0\NET.icon.png" />
+		<Content Include="packages\Microsoft.AspNet.WebPages.3.3.0\NET_Library_EULA_ENU.txt" />
+		<Content Include="packages\Microsoft.AspNet.WebPages.fr.3.3.0\lib\net45\fr\System.Web.Helpers.resources.dll" />
+		<Content Include="packages\Microsoft.AspNet.WebPages.fr.3.3.0\lib\net45\fr\system.web.helpers.xml" />
+		<Content Include="packages\Microsoft.AspNet.WebPages.fr.3.3.0\lib\net45\fr\System.Web.WebPages.Deployment.resources.dll" />
+		<Content Include="packages\Microsoft.AspNet.WebPages.fr.3.3.0\lib\net45\fr\system.web.webpages.deployment.xml" />
+		<Content Include="packages\Microsoft.AspNet.WebPages.fr.3.3.0\lib\net45\fr\System.Web.WebPages.Razor.resources.dll" />
+		<Content Include="packages\Microsoft.AspNet.WebPages.fr.3.3.0\lib\net45\fr\system.web.webpages.razor.xml" />
+		<Content Include="packages\Microsoft.AspNet.WebPages.fr.3.3.0\lib\net45\fr\System.Web.WebPages.resources.dll" />
+		<Content Include="packages\Microsoft.AspNet.WebPages.fr.3.3.0\lib\net45\fr\system.web.webpages.xml" />
+		<Content Include="packages\Microsoft.AspNet.WebPages.fr.3.3.0\NET.icon.png" />
+		<Content Include="packages\Microsoft.AspNet.WebPages.fr.3.3.0\NET_Library_EULA_FRA.txt" />
+		<Content Include="packages\Microsoft.Web.Infrastructure.2.0.0\lib\net40\Microsoft.Web.Infrastructure.dll" />
+		<Content Include="packages\Microsoft.Web.Infrastructure.2.0.0\NET.icon.png" />
+		<Content Include="packages\Microsoft.Web.Infrastructure.2.0.0\NET_Library_EULA_ENU.txt" />
+		<Content Include="packages\Newtonsoft.Json.13.0.4\lib\net20\Newtonsoft.Json.dll" />
+		<Content Include="packages\Newtonsoft.Json.13.0.4\lib\net20\Newtonsoft.Json.xml" />
+		<Content Include="packages\Newtonsoft.Json.13.0.4\lib\net35\Newtonsoft.Json.dll" />
+		<Content Include="packages\Newtonsoft.Json.13.0.4\lib\net35\Newtonsoft.Json.xml" />
+		<Content Include="packages\Newtonsoft.Json.13.0.4\lib\net40\Newtonsoft.Json.dll" />
+		<Content Include="packages\Newtonsoft.Json.13.0.4\lib\net40\Newtonsoft.Json.xml" />
+		<Content Include="packages\Newtonsoft.Json.13.0.4\lib\net45\Newtonsoft.Json.dll" />
+		<Content Include="packages\Newtonsoft.Json.13.0.4\lib\net45\Newtonsoft.Json.xml" />
+		<Content Include="packages\Newtonsoft.Json.13.0.4\lib\net6.0\Newtonsoft.Json.dll" />
+		<Content Include="packages\Newtonsoft.Json.13.0.4\lib\net6.0\Newtonsoft.Json.xml" />
+		<Content Include="packages\Newtonsoft.Json.13.0.4\lib\netstandard1.0\Newtonsoft.Json.dll" />
+		<Content Include="packages\Newtonsoft.Json.13.0.4\lib\netstandard1.0\Newtonsoft.Json.xml" />
+		<Content Include="packages\Newtonsoft.Json.13.0.4\lib\netstandard1.3\Newtonsoft.Json.dll" />
+		<Content Include="packages\Newtonsoft.Json.13.0.4\lib\netstandard1.3\Newtonsoft.Json.xml" />
+		<Content Include="packages\Newtonsoft.Json.13.0.4\lib\netstandard2.0\Newtonsoft.Json.dll" />
+		<Content Include="packages\Newtonsoft.Json.13.0.4\lib\netstandard2.0\Newtonsoft.Json.xml" />
+		<Content Include="packages\Newtonsoft.Json.13.0.4\packageIcon.png" />
+		<Content Include="packages\WebGrease.1.6.0\lib\WebGrease.dll" />
+		<Content Include="packages\WebGrease.1.6.0\tools\WG.EXE" />
+		<Content Include="scripts\autoRefreshPanel.js" />
+		<Content Include="scripts\bootbox.js" />
+		<Content Include="scripts\image-control.js" />
+		<Content Include="scripts\jquery-maskedinput.js" />
+		<Content Include="scripts\selections.js" />
+		<Content Include="scripts\session.js" />
+		<Content Include="scripts\SiteNotificationsHandler.js" />
+		<Content Include="scripts\SiteScripts.js" />
+		<Content Include="scripts\validation.js" />
+		<Content Include="Web.config" />
+		<Content Include="Web.Debug.config">
+			<DependentUpon>Web.config</DependentUpon>
+		</Content>
+		<Content Include="Web.Release.config">
+			<DependentUpon>Web.config</DependentUpon>
+		</Content>
+		<Content Include="WebApp.png" />
+	</ItemGroup>
+	<ItemGroup />
+	<ItemGroup>
+		<Content Include="app_code\Helper.cshtml" />
+		<Content Include="app_data\Events.json" />
+		<Content Include="app_data\Logins.json" />
+		<Content Include="app_data\Medias.json" />
+		<Content Include="app_data\Notifications.json" />
+		<Content Include="app_data\RenewPasswordCommands.json" />
+		<Content Include="app_data\UnverifiedEmails.json" />
+		<Content Include="app_data\Users.json" />
+		<Content Include="packages\Antlr.3.5.0.2\.signature.p7s" />
+		<Content Include="packages\Antlr.3.5.0.2\Antlr.3.5.0.2.nupkg" />
+		<Content Include="packages\Microsoft.AspNet.Mvc.5.3.0\.signature.p7s" />
+		<Content Include="packages\Microsoft.AspNet.Mvc.5.3.0\Content\Web.config.install.xdt" />
+		<Content Include="packages\Microsoft.AspNet.Mvc.5.3.0\Content\Web.config.uninstall.xdt" />
+		<Content Include="packages\Microsoft.AspNet.Mvc.5.3.0\Microsoft.AspNet.Mvc.5.3.0.nupkg" />
+		<Content Include="packages\Microsoft.AspNet.Mvc.fr.5.3.0\.signature.p7s" />
+		<Content Include="packages\Microsoft.AspNet.Mvc.fr.5.3.0\Microsoft.AspNet.Mvc.fr.5.3.0.nupkg" />
+		<Content Include="packages\Microsoft.AspNet.Razor.3.3.0\.signature.p7s" />
+		<Content Include="packages\Microsoft.AspNet.Razor.3.3.0\Microsoft.AspNet.Razor.3.3.0.nupkg" />
+		<Content Include="packages\Microsoft.AspNet.Razor.fr.3.3.0\.signature.p7s" />
+		<Content Include="packages\Microsoft.AspNet.Razor.fr.3.3.0\Microsoft.AspNet.Razor.fr.3.3.0.nupkg" />
+		<Content Include="packages\Microsoft.AspNet.Web.Optimization.1.1.3\.signature.p7s" />
+		<Content Include="packages\Microsoft.AspNet.Web.Optimization.1.1.3\Microsoft.AspNet.Web.Optimization.1.1.3.nupkg" />
+		<Content Include="packages\Microsoft.AspNet.Web.Optimization.fr.1.1.3\.signature.p7s" />
+		<Content Include="packages\Microsoft.AspNet.Web.Optimization.fr.1.1.3\Microsoft.AspNet.Web.Optimization.fr.1.1.3.nupkg" />
+		<Content Include="packages\Microsoft.AspNet.WebPages.3.3.0\.signature.p7s" />
+		<Content Include="packages\Microsoft.AspNet.WebPages.3.3.0\Content\Web.config.install.xdt" />
+		<Content Include="packages\Microsoft.AspNet.WebPages.3.3.0\Content\Web.config.uninstall.xdt" />
+		<Content Include="packages\Microsoft.AspNet.WebPages.3.3.0\Microsoft.AspNet.WebPages.3.3.0.nupkg" />
+		<Content Include="packages\Microsoft.AspNet.WebPages.fr.3.3.0\.signature.p7s" />
+		<Content Include="packages\Microsoft.AspNet.WebPages.fr.3.3.0\Microsoft.AspNet.WebPages.fr.3.3.0.nupkg" />
+		<Content Include="packages\Microsoft.Web.Infrastructure.2.0.0\.signature.p7s" />
+		<Content Include="packages\Microsoft.Web.Infrastructure.2.0.0\Microsoft.Web.Infrastructure.2.0.0.nupkg" />
+		<Content Include="packages\Newtonsoft.Json.13.0.4\.signature.p7s" />
+		<Content Include="packages\Newtonsoft.Json.13.0.4\LICENSE.md" />
+		<Content Include="packages\Newtonsoft.Json.13.0.4\Newtonsoft.Json.13.0.4.nupkg" />
+		<Content Include="packages\Newtonsoft.Json.13.0.4\README.md" />
+		<Content Include="packages\WebGrease.1.6.0\.signature.p7s" />
+		<Content Include="packages\WebGrease.1.6.0\WebGrease.1.6.0.nupkg" />
+		<None Include="packages.config" />
+		<None Include="Properties\PublishProfiles\Wikimedia20260313233304 - Web Deploy.pubxml" />
+		<Content Include="views\Accounts\EditProfil.cshtml" />
+		<Content Include="views\Accounts\EventsJournal.cshtml" />
+		<Content Include="views\Accounts\GetEventsList.cshtml" />
+		<Content Include="views\Accounts\GetLoginsList.cshtml" />
+		<Content Include="views\Accounts\GetUsers.cshtml" />
+		<Content Include="views\Accounts\Login.cshtml" />
+		<Content Include="views\Accounts\LoginsJournal.cshtml" />
+		<Content Include="views\Accounts\ManageUsers.cshtml" />
+		<Content Include="views\Accounts\ProfilForm.cshtml" />
+		<Content Include="views\Accounts\RenewPassword.cshtml" />
+		<Content Include="views\Accounts\RenewPasswordCommand.cshtml" />
+		<Content Include="views\Accounts\Subscribe.cshtml" />
+		<Content Include="views\Medias\About.cshtml" />
+		<Content Include="views\Medias\Create.cshtml" />
+		<Content Include="views\Medias\Details.cshtml" />
+		<Content Include="views\Medias\Edit.cshtml" />
+		<Content Include="views\Medias\GetMediaDetails.cshtml" />
+		<Content Include="views\Medias\GetMedias.cshtml" />
+		<Content Include="views\Medias\GetMediasCategoriesList.cshtml" />
+		<Content Include="views\Medias\List.cshtml" />
+		<Content Include="views\Medias\MediaForm.cshtml" />
+		<Content Include="views\Shared\Error.cshtml" />
+		<Content Include="views\Shared\_header.cshtml" />
+		<Content Include="views\Shared\_Layout.cshtml" />
+		<Content Include="views\Web.config" />
+		<Content Include="views\_ViewStart.cshtml" />
+	</ItemGroup>
+	<PropertyGroup>
+		<VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+		<VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+	</PropertyGroup>
+	<Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+	<Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+	<Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+	<Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+		<AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+	</Target>
+	<ProjectExtensions>
+		<VisualStudio>
+			<FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+				<WebProjectProperties>
+					<UseIIS>True</UseIIS>
+					<AutoAssignPort>True</AutoAssignPort>
+					<DevelopmentServerPort>56124</DevelopmentServerPort>
+					<DevelopmentServerVPath>/</DevelopmentServerVPath>
+					<IISUrl>https://localhost:44385/</IISUrl>
+					<NTLMAuthentication>False</NTLMAuthentication>
+					<UseCustomServer>False</UseCustomServer>
+					<CustomServerUrl>
+					</CustomServerUrl>
+					<SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+				</WebProjectProperties>
+			</FlavorProperties>
+		</VisualStudio>
+	</ProjectExtensions>
+	<!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
   <Target Name="AfterBuild">
   </Target> -->
-  <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>Ce projet fait référence à des packages NuGet qui sont manquants sur cet ordinateur. Utilisez l'option de restauration des packages NuGet pour les télécharger. Pour plus d'informations, consultez http://go.microsoft.com/fwlink/?LinkID=322105. Le fichier manquant est : {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
-  </Target>
 </Project>
+	
